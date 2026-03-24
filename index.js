@@ -71,6 +71,25 @@ function outputSchedule() {
     for (let i = 0; i < eleList.length; i++) {
         document.body.append(eleList[i]);
     }
-
     
+    let remainingLoanBalance = loanTotal;
+    for (let i = 0; i < totalMonths; i++) {
+        let myDiv = document.createElement("div");
+        let principalPaid = monthlyPayment - interestPaid;
+        principalPaid = principalPaid.toFixed(2);
+
+        
+        remainingLoanBalance = remainingLoanBalance - principalPaid;
+        
+        let monthInterestPaid = remainingLoanBalance * monthlyInterestRate;
+        monthInterestPaid = -monthInterestPaid.toFixed(2);
+
+        remainingLoanBalance = remainingLoanBalance.toFixed(2);
+
+        myDiv.innerHTML = `<b>Month ${++i}:</b> Payment: $${monthlyPayment.toFixed(2)}, Interest: $${monthInterestPaid}, Principal: $${principalPaid}, Remaining Balance: $${remainingLoanBalance}`;
+        document.body.append(myDiv);
+    }
+    let b = document.createElement("p");
+    b.innerHTML = "<b>This ends the Amoritizaton Calculator</b>";
+    document.body.append(b);
 }
